@@ -1,4 +1,6 @@
 from datetime import datetime
+import time
+start=time.time()
 file =open("04 input.txt")
 data=file.readlines()
 sorted=[]
@@ -11,15 +13,14 @@ while len(data)!=0:
             pos=x
             earliest=datetime.strptime(data[x].split("]")[0].replace("[","").replace("-"," ").replace(":"," "),"%Y %m %d %H %M")
     add=data.pop(pos)
-    
-    if earliest.hour==0:
-        sorted.append(add)
-    elif "Guard" in add:
-        sorted.append(add)
+    sorted.append(add)
+print("Sorted")
+print(time.time()-start)
 sleep={}
 current_guard=0
-print(sorted[0][15:17])
+#print(sorted[0][15:17])
 for s in sorted:
+#    print(s) 
     if "Guard" in s:
         temp=s[26:30]
         id=""
@@ -44,9 +45,12 @@ guard_total={}
 high_guard=0
 high_total=0
 total=0
+
+
 for g,x in sleep.items():
     temp_min=0
     temp=0
+    total=0
     for t in range(0,len(x)):
         if x[t]>=temp:
             temp=x[t]
